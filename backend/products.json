@@ -1,0 +1,355 @@
+{
+  "products": [
+    {
+      "code": "FSH013",
+      "name": "Pulse Pro High-Top",
+      "description": "Premium materials with elevated padding.",
+      "targetFob": 14.49,
+      "categoryPath": "Footwear > Sneakers > High-top Sneakers",
+      "components": [
+        {
+          "type": "material",
+          "name": "Premium Microfiber PU Leather",
+          "composition": "100% Polyurethane-coated microfiber",
+          "supplier": "Kolkata Sunrise Garments & Fabrics"
+        },
+        {
+          "type": "material",
+          "name": "Breathable Knit Mesh Lining",
+          "composition": "100% Polyester spacer knit",
+          "supplier": "Dhaka Global Garments Ltd."
+        },
+        {
+          "type": "trim",
+          "name": "Pulse Pro High-Top Eyelets",
+          "supplier": "Mumbai Apex Textile Mills",
+          "position": "Front lace panel",
+          "color": "Gunmetal",
+          "code": "EYT-MTL-05",
+          "size": "5 mm diameter",
+          "material": "Metal"
+        },
+        {
+          "type": "trim",
+          "name": "Pulse Pro High-Top Lace Aglets",
+          "supplier": "Ahmedabad Thread & Knit Pvt Ltd",
+          "position": "Ends of each lace",
+          "color": "Gunmetal",
+          "code": "LACE-AG-01",
+          "size": "8 mm diameter",
+          "material": "Metal"
+        },
+        {
+          "type": "trim",
+          "name": "Pulse Pro High-Top Pull Tab",
+          "supplier": "Ahmedabad Thread & Knit Pvt Ltd",
+          "position": "Back collar pull tab",
+          "color": "Black",
+          "code": "PTAB-NYL-01",
+          "size": "80 mm x 25 mm",
+          "material": "Nylon"
+        },
+        {
+          "type": "component",
+          "name": "Insole Cushioning",
+          "supplier": "Ahmedabad Thread & Knit Pvt Ltd",
+          "color": "Beige",
+          "code": "INS-FOAM-01",
+          "weight": "60 g per shoe",
+          "function": "Cushioning and arch support"
+        },
+        {
+          "type": "component",
+          "name": "Tongue Lining",
+          "supplier": "Jiangsu Anchor Textiles Co., Ltd.",
+          "color": "Black",
+          "code": "LIN-TONG-01",
+          "weight": "20 g per shoe",
+          "function": "Moisture management and comfort"
+        }
+      ]
+    },
+    {
+      "code": "FSH014",
+      "name": "Drift Aero High-Top",
+      "description": "Breathable mesh paneling with secure fit.",
+      "targetFob": 20.75,
+      "categoryPath": "Footwear > Sneakers > High-top Sneakers",
+      "components": [
+        {
+          "type": "material",
+          "name": "Leather",
+          "composition": "100% Leather",
+          "code": "LTH-0404"
+        },
+        {
+          "type": "material",
+          "name": "Drift Aero PU Overlay",
+          "composition": "100% Polyurethane",
+          "supplier": "Ahmedabad Thread & Knit Pvt Ltd"
+        },
+        {
+          "type": "trim",
+          "name": "Aluminum Gunmetal Eyelet",
+          "supplier": "Mumbai Apex Textile Mills",
+          "position": "Eyelets along upper lace path",
+          "color": "Gunmetal",
+          "code": "TR-EL-01",
+          "size": "5 mm",
+          "material": "Aluminum"
+        },
+        {
+          "type": "trim",
+          "name": "Flat Shoelace",
+          "supplier": "Dhaka Global Garments Ltd.",
+          "position": "Lace-through eyelets",
+          "color": "Black",
+          "code": "TR-LACE-01",
+          "size": "120 cm",
+          "material": "Polyester"
+        },
+        {
+          "type": "material",
+          "name": "Drift Aero AirMesh Upper",
+          "composition": "85% Polyester, 15% Elastane",
+          "supplier": "Ho Chi Minh City Textile & Garment Co., Ltd."
+        },
+        {
+          "type": "component",
+          "name": "Tongue Foam Padding",
+          "supplier": "Jiangsu Anchor Textiles Co., Ltd.",
+          "color": "Black",
+          "code": "CMP-TONGUE-01",
+          "weight": "25 g per tongue",
+          "function": "Tongue cushioning and abrasion protection"
+        },
+        {
+          "type": "component",
+          "name": "EVA Insole",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd.",
+          "color": "Black",
+          "code": "CMP-INSOLE-01",
+          "weight": "40 g per insole",
+          "function": "Footbed cushioning and arch support"
+        },
+        {
+          "type": "trim",
+          "name": "Heel Pull Tab",
+          "supplier": "Ho Chi Minh City Textile & Garment Co., Ltd.",
+          "position": "Back of each heel collar",
+          "color": "Black",
+          "code": "TR-PULL-01",
+          "size": "60 mm",
+          "material": "Nylon"
+        }
+      ]
+    },
+    {
+      "code": "FSH016",
+      "name": "Vibe City High-Top",
+      "description": "Stylish silhouette with reinforced toe guard.",
+      "targetFob": 26.13,
+      "categoryPath": "Footwear > Sneakers > High-top Sneakers",
+      "components": [
+        {
+          "type": "material",
+          "name": "Premium PU Upper",
+          "composition": "100% Polyurethane (PU) coated fabric",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd."
+        },
+        {
+          "type": "material",
+          "name": "Breathable Nylon Mesh",
+          "composition": "100% Nylon",
+          "supplier": "Dalat Craft & Knitwear Corp."
+        },
+        {
+          "type": "trim",
+          "name": "Flat Nylon Shoelace",
+          "supplier": "Ahmedabad Thread & Knit Pvt Ltd",
+          "position": "Lacing system",
+          "color": "Black",
+          "code": "LAC-120",
+          "size": "120 cm",
+          "material": "Polyester/Nylon"
+        },
+        {
+          "type": "trim",
+          "name": "Metal Eyelet",
+          "supplier": "Dhaka Global Garments Ltd.",
+          "position": "Lace eyelets",
+          "color": "Gunmetal",
+          "code": "EYE-5MM-GUN",
+          "size": "5 mm",
+          "material": "Zinc-coated Metal"
+        },
+        {
+          "type": "trim",
+          "name": "Nylon Heel Pull Tab",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd.",
+          "position": "Heel back pull",
+          "color": "Black",
+          "code": "TAB-HT-60",
+          "size": "60 mm",
+          "material": "Nylon"
+        },
+        {
+          "type": "component",
+          "name": "Cushioned Insole",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd.",
+          "color": "Beige",
+          "code": "COMP-INS-01",
+          "weight": "40 g",
+          "function": "Cushioning and arch support with antimicrobial top fabric"
+        },
+        {
+          "type": "component",
+          "name": "Tongue Foam Liner",
+          "supplier": "Istanbul Anatolia Garments Manufacturing",
+          "color": "Black",
+          "code": "COMP-TN-01",
+          "weight": "18 g",
+          "function": "Tongue padding for comfort and moisture management"
+        }
+      ]
+    },
+    {
+      "code": "FSH019",
+      "name": "Edge Urban High-Top",
+      "description": "Durable leather overlays and grippy outsole.",
+      "targetFob": 51.69,
+      "categoryPath": "Footwear > Sneakers > High-top Sneakers",
+      "components": [
+        {
+          "type": "material",
+          "name": "Full-Grain Leather Upper",
+          "composition": "100% Cowhide Leather (Full-Grain)",
+          "supplier": "Istanbul Anatolia Garments Manufacturing"
+        },
+        {
+          "type": "material",
+          "name": "Nylon Mesh Lining",
+          "composition": "100% Polyamide Nylon",
+          "supplier": "Dalat Craft & Knitwear Corp."
+        },
+        {
+          "type": "trim",
+          "name": "Metal Eyelet Antique Brass",
+          "supplier": "Dhaka Global Garments Ltd.",
+          "position": "Lace panels on both sides",
+          "color": "Antique Brass",
+          "code": "EYELET-01",
+          "size": "6 mm",
+          "material": "Metal"
+        },
+        {
+          "type": "trim",
+          "name": "Round Shoelace (Black)",
+          "supplier": "Kolkata Sunrise Garments & Fabrics",
+          "position": "Lace closure along eyelets",
+          "color": "Black",
+          "code": "LACE-01",
+          "size": "140 cm",
+          "material": "Polyester"
+        },
+        {
+          "type": "trim",
+          "name": "Heel Pull Tab",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd.",
+          "position": "Back heel collar",
+          "color": "Black",
+          "code": "PULL-01",
+          "size": "70 mm",
+          "material": "Nylon"
+        },
+        {
+          "type": "component",
+          "name": "Insole Cushioning",
+          "supplier": "Quanzhou Silk & Knit Co., Ltd.",
+          "color": "Black",
+          "code": "INS-01",
+          "weight": "40 g",
+          "function": "Cushioning and moisture management"
+        },
+        {
+          "type": "component",
+          "name": "Tongue Foam Pad",
+          "supplier": "Istanbul Anatolia Garments Manufacturing",
+          "color": "Black",
+          "code": "TONG-01",
+          "weight": "8 g",
+          "function": "Tongue padding for comfort and fit"
+        }
+      ]
+    },
+    {
+      "code": "FSH021",
+      "name": "City Rise High-Top",
+      "description": "Lightweight city sneaker with padded collar and responsive sole.",
+      "targetFob": 31.89,
+      "categoryPath": "Footwear > Sneakers > High-top Sneakers",
+      "components": [
+        {
+          "type": "material",
+          "name": "City Rise Knit Upper",
+          "composition": "80% Polyester, 20% Elastane",
+          "supplier": "Istanbul Anatolia Garments Manufacturing"
+        },
+        {
+          "type": "material",
+          "name": "City Rise PU Overlay",
+          "composition": "100% Polyester with PU coating",
+          "supplier": "Jiangsu Anchor Textiles Co., Ltd."
+        },
+        {
+          "type": "trim",
+          "name": "Metal Eyelet",
+          "supplier": "Dhaka Global Garments Ltd.",
+          "position": "Lacing eyelets along vamp and collar",
+          "color": "Gunmetal",
+          "code": "EYE-6MM",
+          "size": "6 mm",
+          "material": "Metal"
+        },
+        {
+          "type": "trim",
+          "name": "Flat Shoelaces",
+          "supplier": "Ho Chi Minh City Textile & Garment Co., Ltd.",
+          "position": "Lacing",
+          "color": "Black",
+          "code": "LACE-120",
+          "size": "120 cm length × 6 mm width",
+          "material": "Polyester"
+        },
+        {
+          "type": "trim",
+          "name": "Heel Pull Tab",
+          "supplier": "Mumbai Apex Textile Mills",
+          "position": "Heel back",
+          "color": "Black",
+          "code": "TAB-HT-01",
+          "size": "60 mm",
+          "material": "Nylon"
+        },
+        {
+          "type": "component",
+          "name": "Sockliner EVA",
+          "supplier": "Shenzhen OceanWeave Fabrics Co., Ltd.",
+          "color": "Beige",
+          "code": "COMP-SOCK-EVA",
+          "weight": "N/A",
+          "function": "Cushioning and odor control"
+        },
+        {
+          "type": "component",
+          "name": "Midsole EVA Core",
+          "supplier": "Dalat Craft & Knitwear Corp.",
+          "color": "White",
+          "code": "COMP-MID-EVA",
+          "weight": "N/A",
+          "function": "Shock absorption and ride"
+        }
+      ]
+    }
+  ]
+}
