@@ -45,7 +45,7 @@ A full-stack application that simulates a brand sourcing footwear products from 
 | File | Purpose |
 |---|---|
 | `config.py` | Loads `OPENAI_API_KEY` and `MODEL_NAME` from a `.env` file via `python-dotenv`. `MODEL_NAME` defaults to `gpt-4o`. |
-| `models.py` | Pydantic models: `ProductComponent`, `Product`, `SupplierProfile`, `NegotiationRequest`, `NegotiationMessage`, `SupplierQuote`, `NegotiationDecision`. |
+| `models.py` | Pydantic models: `ProductComponent`, `Product`, `SupplierProfile`, `NegotiationRequest`, `NegotiationDecision`. |
 | `suppliers.py` | Hardcoded list of 3 `SupplierProfile` objects. Exposes `load_products()` (reads `products.json`) and `get_supplier(id)`. |
 | `products.json` | Catalog of 5 high-top sneaker SKUs with materials, trims, and components. |
 | `agents.py` | `SupplierAgent` and `BrandAgent` classes — system prompts, conversation history management, LLM calls. |
@@ -58,7 +58,6 @@ A full-stack application that simulates a brand sourcing footwear products from 
 
 - Receives a `SupplierProfile` and the product list.
 - Builds a system prompt that embeds the supplier's identity, pricing rules (targetFob × price_multiplier ± 3%), lead time, payment terms, and the full product catalog with components.
-- Pre-computes quoted prices in `__init__` with random ±3% variation (stored in `self.quoted_prices`, though these are guidance for the LLM — the actual quoting happens in natural language via the LLM).
 - `respond(brand_message)` appends the brand's message to conversation history, calls the LLM, appends the reply, and returns it.
 
 **BrandAgent** — one instance per negotiation.
@@ -159,36 +158,34 @@ Total LLM calls per negotiation: 1 (RFQ) + 3 (round 1 supplier replies) + 3×2 (
 
 2. **Single concurrent negotiation.** The backend has no session management. Multiple browser tabs opening WebSocket connections simultaneously will each run independent negotiations, all competing for LLM API rate limits. There is no queuing or mutual exclusion.
 
-3. **`quoted_prices` are computed but not enforced.** `SupplierAgent.__init__` pre-computes opening prices in `self.quoted_prices`, but this dict is never injected into the system prompt or referenced by the LLM. The LLM is told the pricing formula in the system prompt and generates its own numbers. The pre-computed prices and the LLM-generated prices may not match.
+3. **Brand Agent conversation history has a role inversion.** In `generate_counter`, the supplier's response is appended as `role: "assistant"` and the brand's own counter-proposal is appended as `role: "user"`. This means the brand agent's conversation history has the brand's own messages as "user" turns and supplier messages as "assistant" turns — effectively the brand agent is roleplaying in a conversation where it treats the supplier's words as its own outputs. This works in practice because the system prompt establishes the brand identity, but it's semantically inverted.
 
-4. **Brand Agent conversation history has a role inversion.** In `generate_counter`, the supplier's response is appended as `role: "assistant"` and the brand's own counter-proposal is appended as `role: "user"`. This means the brand agent's conversation history has the brand's own messages as "user" turns and supplier messages as "assistant" turns — effectively the brand agent is roleplaying in a conversation where it treats the supplier's words as its own outputs. This works in practice because the system prompt establishes the brand identity, but it's semantically inverted.
+4. **Competitive leverage is only injected from round 3 onward.** In `main.py`, `all_quotes_summary` is only passed when `round_num > 2`. The brand agent has no cross-supplier context during its round-2 counter-proposals, even though it already has all three round-1 quotes.
 
-5. **Competitive leverage is only injected from round 3 onward.** In `main.py`, `all_quotes_summary` is only passed when `round_num > 2`. The brand agent has no cross-supplier context during its round-2 counter-proposals, even though it already has all three round-1 quotes.
+5. **`_peer_summary` leaks internal data.** The peer summary helper uses `s.price_multiplier` to determine if a supplier "appears competitive" — this is internal data that shouldn't be in a prompt. The heuristic (`price_multiplier <= 1.0` → "competitive") is also overly simplistic and doesn't reflect actual quoted prices.
 
-6. **`_peer_summary` leaks internal data.** The peer summary helper uses `s.price_multiplier` to determine if a supplier "appears competitive" — this is internal data that shouldn't be in a prompt. The heuristic (`price_multiplier <= 1.0` → "competitive") is also overly simplistic and doesn't reflect actual quoted prices.
+6. **Decision is made on only the last reply.** `make_decision(final_offers=latest_supplier_replies)` passes only each supplier's most recent message, not the full conversation. The decision LLM call doesn't see earlier rounds, counter-offers, or concessions — only the final response from each supplier.
 
-7. **Decision is made on only the last reply.** `make_decision(final_offers=latest_supplier_replies)` passes only each supplier's most recent message, not the full conversation. The decision LLM call doesn't see earlier rounds, counter-offers, or concessions — only the final response from each supplier.
-
-8. **`NegotiationDecision.comparison` is typed as `dict` (untyped).** The Pydantic model uses a bare `dict` for the comparison field, losing all type safety. The structured output schema defines a detailed per-supplier object, but after JSON parsing and conversion, it's stored as an untyped dict.
+7. **`NegotiationDecision.comparison` is typed as `dict` (untyped).** The Pydantic model uses a bare `dict` for the comparison field, losing all type safety. The structured output schema defines a detailed per-supplier object, but after JSON parsing and conversion, it's stored as an untyped dict.
 
 ### Technical
 
-9. **Hardcoded WebSocket URL.** The frontend connects to `ws://localhost:8000/ws/negotiate`. This won't work in production or if the backend runs on a different host/port. No environment variable or proxy configuration is set up.
+8. **Hardcoded WebSocket URL.** The frontend connects to `ws://localhost:8000/ws/negotiate`. This won't work in production or if the backend runs on a different host/port. No environment variable or proxy configuration is set up.
 
-10. **No reconnection or retry logic.** If the WebSocket connection drops mid-negotiation, the frontend simply shows an error. There is no automatic reconnection, and the negotiation cannot be resumed.
+9. **No reconnection or retry logic.** If the WebSocket connection drops mid-negotiation, the frontend simply shows an error. There is no automatic reconnection, and the negotiation cannot be resumed.
 
-11. **No input validation on quantities.** The backend trusts whatever quantities are sent. Zero or negative quantities, missing product codes, or non-existent codes are not validated beyond Pydantic's `dict[str, int]` type check.
+10. **No input validation on quantities.** The backend trusts whatever quantities are sent. Zero or negative quantities, missing product codes, or non-existent codes are not validated beyond Pydantic's `dict[str, int]` type check.
 
-12. **All LLM calls use the same model.** Both the brand and supplier agents use the same `MODEL_NAME` (default `gpt-4o`). There's no option to use a cheaper model for supplier simulation and a more capable one for the brand decision.
+11. **All LLM calls use the same model.** Both the brand and supplier agents use the same `MODEL_NAME` (default `gpt-4o`). There's no option to use a cheaper model for supplier simulation and a more capable one for the brand decision.
 
-13. **No rate-limit handling.** With 17 LLM calls per negotiation and parallel `asyncio.gather` calls, the app can hit OpenAI rate limits. There are no retries, exponential backoff, or rate-limit awareness.
+12. **No rate-limit handling.** With 17 LLM calls per negotiation and parallel `asyncio.gather` calls, the app can hit OpenAI rate limits. There are no retries, exponential backoff, or rate-limit awareness.
 
-14. **`pydantic` is not in `requirements.txt`.** It's pulled in transitively by `fastapi`, so it works, but it's an implicit dependency.
+13. **`pydantic` is not in `requirements.txt`.** It's pulled in transitively by `fastapi`, so it works, but it's an implicit dependency.
 
 ### Deployment
 
-15. **Dev-only CORS configuration.** `allow_origins=["*"]` is set for development convenience. This must be tightened for any production deployment.
+14. **Dev-only CORS configuration.** `allow_origins=["*"]` is set for development convenience. This must be tightened for any production deployment.
 
-16. **No containerization or deployment config.** No Dockerfile, docker-compose, or CI/CD configuration. The `Makefile` provides local dev convenience only.
+15. **No containerization or deployment config.** No Dockerfile, docker-compose, or CI/CD configuration. The `Makefile` provides local dev convenience only.
 
-17. **API key in `.env` file.** The OpenAI API key is loaded from a local `.env` file. For production, a secrets manager or environment variable injection from the deployment platform would be needed.
+16. **API key in `.env` file.** The OpenAI API key is loaded from a local `.env` file. For production, a secrets manager or environment variable injection from the deployment platform would be needed.

@@ -27,7 +27,7 @@ React (Vite + TailwindCSS)  ──WebSocket──►  FastAPI
 ```
 
 - **Brand Agent** — generates RFQs, counter-proposals using competitive leverage, and a final structured decision.
-- **Supplier Agents** — each has a distinct profile (quality, cost tier, lead time, payment terms) and negotiates independently via LLM calls.
+- **Supplier Agents** — each has a distinct profile (quality rating, lead time, payment terms, price multiplier) and negotiates independently via LLM calls.
 - **WebSocket** — streams every message in real time to the frontend as the negotiation unfolds.
 
 ## Prerequisites

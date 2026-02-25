@@ -8,7 +8,7 @@ You are a test-writing agent for a supplier negotiation app. Follow these instru
 backend/                    # Python — FastAPI + OpenAI
   main.py                   # FastAPI app, WebSocket negotiation orchestrator, _peer_summary helper
   agents.py                 # BrandAgent, SupplierAgent classes (async LLM calls via AsyncOpenAI)
-  models.py                 # Pydantic models: Product, SupplierProfile, NegotiationRequest, NegotiationDecision, etc.
+  models.py                 # Pydantic models: ProductComponent, Product, SupplierProfile, NegotiationRequest, NegotiationDecision
   suppliers.py              # Hardcoded SUPPLIERS list, load_products() (reads products.json), get_supplier()
   config.py                 # Loads OPENAI_API_KEY and MODEL_NAME from .env
   products.json             # Product catalog (5 SKUs)
