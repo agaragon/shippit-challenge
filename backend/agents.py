@@ -193,17 +193,15 @@ class BrandAgent:
             for s in suppliers
         }
 
-    async def generate_rfq(self) -> str:
+    async def generate_rfq(self, supplier_name: str) -> str:
         messages = [
             {"role": "system", "content": self._system_prompt},
             {
                 "role": "user",
                 "content": (
-                    "Generate an RFQ message to send to suppliers, listing the "
+                    f"Generate an RFQ message addressed to {supplier_name}, listing the "
                     "products and quantities you need quoted. Keep it concise and professional. "
-                    "This message will be sent to multiple suppliers, so use a generic greeting "
-                    "such as 'Dear Supplier' — do NOT use bracket placeholders like [Supplier Name]. "
-                    "Do NOT include placeholder contact information — just sign off with your name and title."
+                    "Sign off with your name and title only — no placeholder contact information."
                 ),
             },
         ]
@@ -235,9 +233,11 @@ class BrandAgent:
                 f"{all_quotes_summary}]"
             )
 
+        supplier_name = next(s.name for s in self.suppliers if s.id == supplier_id)
         user_content = (
-            "Based on the supplier's response above, write a professional counter-proposal "
-            "or follow-up. Push for better pricing, terms, or lead time. If you have context "
+            f"You are negotiating with {supplier_name}. Based on their response above, "
+            "write a professional counter-proposal or follow-up addressed to them by name. "
+            "Push for better pricing, terms, or lead time. If you have context "
             "about competing offers, use it as leverage without revealing exact figures."
             + competitive_hint
         )

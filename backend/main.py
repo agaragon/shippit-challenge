@@ -86,12 +86,12 @@ async def negotiate(ws: WebSocket):
         # ------------------------------------------------------------------ #
         await ws.send_json({"type": "status", "message": "Round 1 — sending RFQ to all suppliers…"})
 
-        rfq = await brand_agent.generate_rfq()
-
         # Track the most recent supplier reply per supplier_id
         latest_supplier_replies: dict[int, str] = {}
 
         async def run_round1(supplier_id: int):
+            supplier_name = supplier_agents[supplier_id].supplier.name
+            rfq = await brand_agent.generate_rfq(supplier_name)
             await send_msg(supplier_id, "brand", rfq, round_num=1)
             reply = await supplier_agents[supplier_id].respond(rfq)
             latest_supplier_replies[supplier_id] = reply
