@@ -30,6 +30,6 @@ output "log_group_name" {
 }
 
 output "nameservers" {
-  description = "Set these as your domain's nameservers at your registrar"
-  value       = var.domain_name != "" ? aws_route53_zone.main[0].name_servers : []
+  description = "Nameservers for the hosted zone"
+  value       = var.domain_name != "" ? data.aws_route53_zone.main[0].name_servers : []
 }

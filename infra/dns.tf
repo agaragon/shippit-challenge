@@ -1,12 +1,8 @@
-# --- Route 53 Hosted Zone ---
-# Created when a domain is provided. After apply, update your domain registrar's
-# nameservers to the values in the `nameservers` output.
+# --- Route 53 Hosted Zone (existing) ---
 
-resource "aws_route53_zone" "main" {
+data "aws_route53_zone" "main" {
   count = var.domain_name != "" ? 1 : 0
   name  = var.hosted_zone_domain
-
-  tags = { Name = "${var.project_name}-zone" }
 }
 
 # --- ACM Certificate ---
@@ -33,7 +29,7 @@ resource "aws_route53_record" "cert_validation" {
     }
   }
 
-  zone_id = aws_route53_zone.main[0].zone_id
+  zone_id = data.aws_route53_zone.main[0].zone_id
   name    = each.value.name
   type    = each.value.type
   ttl     = 60
@@ -52,7 +48,7 @@ resource "aws_acm_certificate_validation" "app" {
 
 resource "aws_route53_record" "app" {
   count   = var.domain_name != "" ? 1 : 0
-  zone_id = aws_route53_zone.main[0].zone_id
+  zone_id = data.aws_route53_zone.main[0].zone_id
   name    = var.domain_name
   type    = "A"
 
