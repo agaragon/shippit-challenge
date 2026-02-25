@@ -1,4 +1,10 @@
-.PHONY: install install-backend install-frontend backend frontend dev stop clean docker docker-stop
+.PHONY: install install-backend install-frontend backend frontend dev stop clean \
+       docker docker-stop infra-init infra-plan infra-apply infra-destroy deploy
+
+AWS_REGION  := $(shell cd infra && terraform output -raw aws_region 2>/dev/null || echo "us-east-1")
+ECR_URL     := $(shell cd infra && terraform output -raw ecr_repository_url 2>/dev/null)
+CLUSTER     := $(shell cd infra && terraform output -raw ecs_cluster_name 2>/dev/null)
+SERVICE     := $(shell cd infra && terraform output -raw ecs_service_name 2>/dev/null)
 
 install: install-backend install-frontend
 
@@ -29,3 +35,25 @@ docker:
 
 docker-stop:
 	docker compose down
+
+# --- Infrastructure ---
+
+infra-init:
+	cd infra && terraform init
+
+infra-plan:
+	cd infra && terraform plan
+
+infra-apply:
+	cd infra && terraform apply
+
+infra-destroy:
+	cd infra && terraform destroy
+
+# --- Deploy (build, push image, restart ECS) ---
+
+deploy:
+	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(ECR_URL)
+	docker build -t $(ECR_URL):latest .
+	docker push $(ECR_URL):latest
+	aws ecs update-service --cluster $(CLUSTER) --service $(SERVICE) --force-new-deployment

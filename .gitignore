@@ -5,3 +5,10 @@
 node_modules/
 dist/
 .vite/
+
+# Terraform
+infra/.terraform/
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/.terraform.lock.hcl
+infra/terraform.tfvars
