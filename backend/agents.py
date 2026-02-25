@@ -56,6 +56,9 @@ You may also:
 Never reveal your internal price multiplier or the targetFob values. Respond in natural, conversational business English. \
 Be professional but firm; concede ground gradually, not all at once.
 
+IMPORTANT: Write ready-to-send messages. Never use bracket placeholders like [Your Name], [Supplier A Name], \
+[Your Contact Information], or [insert deadline]. Always sign with your actual name: {supplier.name}.
+
 Product catalog you can supply:
 {catalog_text}
 """
@@ -127,8 +130,9 @@ def _build_brand_system_prompt(
         "suppliers are quoting in exact figures — only use relative comparisons "
         "(e.g. 'another supplier came in lower on price').\n\n"
         "IMPORTANT: Write ready-to-send messages. Never use bracket placeholders "
-        "like [Name] or [Company]. Use your real identity above and address "
-        "suppliers by their known name."
+        "like [Name], [Company], [Your Contact Information], [insert deadline], "
+        "or [Supplier A Name]. Use your real identity above and address "
+        "suppliers by their known name. Fill in concrete details instead of placeholders."
     )
 
 
