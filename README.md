@@ -60,6 +60,31 @@ npm run dev
 
 Open `http://localhost:5173`, configure quantities, and click **Start Negotiation**.
 
+## Testing
+
+Run the full backend test suite with a single command from the project root:
+
+```bash
+make test
+```
+
+This installs the test dependencies (`pytest`, `pytest-asyncio`, `httpx`) into the backend virtualenv and then runs all tests. No OpenAI API key is needed — the OpenAI client is fully mocked.
+
+To re-run tests without reinstalling dependencies:
+
+```bash
+cd backend && venv/bin/pytest tests/ -v
+```
+
+### What is covered
+
+| Test file | What it tests |
+|---|---|
+| `tests/test_models.py` | All five Pydantic models — valid construction, missing required fields, wrong types, optional field defaults |
+| `tests/test_suppliers.py` | `load_products()` (5 products, correct codes, positive FOB), `get_supplier()` (correct profiles, `ValueError` on unknown ID), `SUPPLIERS` list integrity |
+| `tests/test_agents.py` | `SupplierAgent.respond` (history accumulation, reply passthrough, `RuntimeError` on LLM failure), `BrandAgent.generate_rfq`, `generate_counter` (per-supplier history isolation), `make_decision` (structured JSON → `NegotiationDecision` with comparison dict keyed by supplier name) |
+| `tests/test_main.py` | `GET /health`, `_peer_summary` helper, WebSocket negotiation happy path (all event types received, all three suppliers, both roles, positive round numbers), error paths (wrong message type, invalid JSON) |
+
 ## Configuration
 
 | Variable | Default | Description |
@@ -78,6 +103,7 @@ backend/
   suppliers.py     # Supplier profiles and product loader
   products.json    # Product catalog (5 SKUs)
   config.py        # Env config
+  tests/           # Backend test suite (pytest)
 scenarios.json               # Pre-built negotiation scenarios for testing
 frontend/
   src/

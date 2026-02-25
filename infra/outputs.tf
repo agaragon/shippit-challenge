@@ -1,3 +1,7 @@
+output "aws_region" {
+  value = var.aws_region
+}
+
 output "alb_dns_name" {
   description = "ALB public DNS name"
   value       = aws_lb.main.dns_name
