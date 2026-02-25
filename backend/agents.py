@@ -129,10 +129,11 @@ def _build_brand_system_prompt(
         "faster delivery. Be professional but firm. Do not reveal what other "
         "suppliers are quoting in exact figures — only use relative comparisons "
         "(e.g. 'another supplier came in lower on price').\n\n"
-        "IMPORTANT: Write ready-to-send messages. Never use bracket placeholders "
-        "like [Name], [Company], [Your Contact Information], [insert deadline], "
-        "or [Supplier A Name]. Use your real identity above and address "
-        "suppliers by their known name. Fill in concrete details instead of placeholders."
+        "IMPORTANT: Write ready-to-send messages. NEVER use bracket placeholders "
+        "such as [Name], [Company], [Your Contact Information], [insert deadline], "
+        "[Supplier Name], or any other [bracketed text]. Use your real identity above, "
+        "address suppliers by their known name, and omit any information you don't have "
+        "rather than inserting a placeholder."
     )
 
 
@@ -199,7 +200,10 @@ class BrandAgent:
                 "role": "user",
                 "content": (
                     "Generate an RFQ message to send to suppliers, listing the "
-                    "products and quantities you need quoted. Keep it concise and professional."
+                    "products and quantities you need quoted. Keep it concise and professional. "
+                    "This message will be sent to multiple suppliers, so use a generic greeting "
+                    "such as 'Dear Supplier' — do NOT use bracket placeholders like [Supplier Name]. "
+                    "Do NOT include placeholder contact information — just sign off with your name and title."
                 ),
             },
         ]

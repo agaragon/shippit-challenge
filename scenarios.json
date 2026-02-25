@@ -1,0 +1,79 @@
+{
+  "scenarios": [
+    {
+      "name": "Budget-focused bulk order (favours Supplier A)",
+      "description": "Very large quantities with a note emphasising cost above all else. Supplier A's 0.85x price multiplier should dominate.",
+      "quantities": {
+        "FSH013": 50000,
+        "FSH014": 30000,
+        "FSH016": 30000,
+        "FSH019": 20000,
+        "FSH021": 25000
+      },
+      "note": "This is a price-sensitive wholesale channel. The absolute lowest total cost is the deciding factor — we can tolerate longer lead times and standard quality. Budget is extremely tight."
+    },
+    {
+      "name": "Premium quality launch (favours Supplier B)",
+      "description": "Moderate quantities with a note stressing quality and brand reputation. Supplier B's 4.7 quality rating and balanced terms should stand out.",
+      "quantities": {
+        "FSH013": 5000,
+        "FSH014": 5000,
+        "FSH016": 5000,
+        "FSH019": 8000,
+        "FSH021": 5000
+      },
+      "note": "These products are for a flagship retail launch with a major department store. Quality and craftsmanship are the top priorities — we cannot risk returns or defects. We are willing to pay a premium for the highest quality supplier. Lead time is flexible."
+    },
+    {
+      "name": "Urgent restock (favours Supplier C)",
+      "description": "Small rush order with a note demanding the fastest possible delivery. Supplier C's 15-day lead time should win despite the higher price.",
+      "quantities": {
+        "FSH013": 2000,
+        "FSH014": 1500,
+        "FSH016": 1500,
+        "FSH019": 1000,
+        "FSH021": 2000
+      },
+      "note": "URGENT — we have a stockout across multiple retail partners and need delivery in under 20 days. Speed is the single most important factor. We will pay whatever it takes to get these units as fast as possible."
+    },
+    {
+      "name": "Balanced mid-size order (any supplier could win)",
+      "description": "Moderate quantities with no strong preference — lets the negotiation dynamics decide the winner.",
+      "quantities": {
+        "FSH013": 10000,
+        "FSH014": 5000,
+        "FSH016": 5000,
+        "FSH019": 5000,
+        "FSH021": 5000
+      },
+      "note": "We want the best overall value considering price, quality, lead time, and payment terms. No single factor dominates — surprise us with the strongest package."
+    },
+    {
+      "name": "Single-SKU premium test (favours Supplier B)",
+      "description": "Small order of only the most expensive SKU, emphasising quality for a limited edition drop.",
+      "quantities": {
+        "FSH019": 3000
+      },
+      "note": "This is a limited-edition leather sneaker drop. Material quality and finishing must be flawless — our brand reputation depends on it. Cost is secondary."
+    },
+    {
+      "name": "Fast fashion turnaround (favours Supplier C)",
+      "description": "Spread across cheap SKUs with an aggressive timeline and seasonal deadline.",
+      "quantities": {
+        "FSH013": 8000,
+        "FSH014": 6000,
+        "FSH016": 6000
+      },
+      "note": "These are for a seasonal pop-up launching in 3 weeks. If we miss the window, the order is worthless. Fastest delivery wins — we need firm commitment on a sub-20-day lead time."
+    },
+    {
+      "name": "Cost-optimised basics (favours Supplier A)",
+      "description": "High volume of the two cheapest SKUs with aggressive cost targets.",
+      "quantities": {
+        "FSH013": 80000,
+        "FSH014": 40000
+      },
+      "note": "These are basic styles for a discount retail chain. Target FOB must be met or beaten — every cent matters at this volume. Quality only needs to be acceptable, not premium. We have no time pressure."
+    }
+  ]
+}
