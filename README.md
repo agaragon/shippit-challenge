@@ -4,6 +4,8 @@ AI-powered multi-supplier negotiation app. A brand agent negotiates simultaneous
 
 Built as a response to a coding challenge simulating brand–supplier procurement for footwear products.
 
+**Live demo:** https://si.programmingwitharagon.com/
+
 ## Demo — Negotiation Stages
 
 A negotiation proceeds in two stages:

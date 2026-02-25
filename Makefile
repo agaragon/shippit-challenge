@@ -60,6 +60,6 @@ deploy:
 	$(eval CLUSTER    := $(shell cd infra && terraform output -raw ecs_cluster_name))
 	$(eval SERVICE    := $(shell cd infra && terraform output -raw ecs_service_name))
 	aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(ECR_URL)
-	docker build -t $(ECR_URL):latest .
+	docker build --network=host -t $(ECR_URL):latest .
 	docker push $(ECR_URL):latest
 	aws ecs update-service --cluster $(CLUSTER) --service $(SERVICE) --force-new-deployment
