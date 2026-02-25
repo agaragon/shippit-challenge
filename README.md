@@ -4,6 +4,18 @@ AI-powered multi-supplier negotiation app. A brand agent negotiates simultaneous
 
 Built as a response to a coding challenge simulating brand–supplier procurement for footwear products.
 
+## Demo — Negotiation Stages
+
+A negotiation proceeds in two stages:
+
+**Stage 1 — RFQ & Multi-Round Negotiation.** The brand agent sends an RFQ to all three suppliers in parallel. Each supplier replies with an initial quote. Over subsequent rounds the brand leverages competing offers to push for better terms.
+
+![Stage 1 — RFQs sent and suppliers respond in parallel](screenshot_negotiating.png)
+
+**Stage 2 — Decision.** Once all rounds complete, the brand agent scores every final offer across cost, quality, lead time, and payment terms, then selects a winner with a structured comparison and written reasoning.
+
+![Stage 2 — Supplier C wins on fastest delivery](screenshot_decision.png)
+
 ## Architecture
 
 ```
@@ -66,8 +78,11 @@ backend/
   suppliers.py     # Supplier profiles and product loader
   products.json    # Product catalog (5 SKUs)
   config.py        # Env config
+scenarios.json               # Pre-built negotiation scenarios for testing
 frontend/
   src/
     App.jsx                    # Main UI (controls, chat columns, decision panel)
     hooks/useNegotiation.js    # WebSocket state management hook
 ```
+
+`scenarios.json` contains 7 ready-made negotiation scenarios, each with specific quantities and a brand note designed to steer the outcome toward a particular supplier. Use them to verify that the agents respond coherently to different priorities (lowest cost, highest quality, fastest delivery, balanced value).
