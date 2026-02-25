@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -9,13 +9,6 @@ class ProductComponent(BaseModel):
     name: str
     composition: Optional[str] = None
     supplier: Optional[str] = None
-    position: Optional[str] = None
-    color: Optional[str] = None
-    code: Optional[str] = None
-    size: Optional[str] = None
-    material: Optional[str] = None
-    weight: Optional[str] = None
-    function: Optional[str] = None
 
 
 class Product(BaseModel):
@@ -31,7 +24,6 @@ class SupplierProfile(BaseModel):
     id: int
     name: str
     quality_rating: float
-    cost_tier: str
     base_lead_time_days: int
     payment_terms: str
     price_multiplier: float
@@ -40,21 +32,6 @@ class SupplierProfile(BaseModel):
 class NegotiationRequest(BaseModel):
     quantities: dict[str, int]
     note: Optional[str] = None
-
-
-class NegotiationMessage(BaseModel):
-    supplier_id: int
-    role: Literal["brand", "supplier"]
-    content: str
-    round: int
-
-
-class SupplierQuote(BaseModel):
-    supplier_id: int
-    per_product_prices: dict[str, float]
-    total_price: float
-    lead_time_days: int
-    payment_terms: str
 
 
 class NegotiationDecision(BaseModel):

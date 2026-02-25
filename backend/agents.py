@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import random
 
 from openai import AsyncOpenAI
 
@@ -71,11 +70,6 @@ class SupplierAgent:
         self.conversation_history: list[dict] = [
             {"role": "system", "content": _build_supplier_system_prompt(supplier, products)}
         ]
-        # Pre-compute opening prices with ±3% variation so they stay consistent
-        self.quoted_prices: dict[str, float] = {
-            p.code: round(p.targetFob * supplier.price_multiplier * random.uniform(0.97, 1.03), 2)
-            for p in products
-        }
 
     async def respond(self, brand_message: str) -> str:
         self.conversation_history.append({"role": "user", "content": brand_message})
