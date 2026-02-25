@@ -114,3 +114,12 @@ frontend/
 ```
 
 `scenarios.json` contains 7 ready-made negotiation scenarios, each with specific quantities and a brand note designed to steer the outcome toward a particular supplier. Use them to verify that the agents respond coherently to different priorities (lowest cost, highest quality, fastest delivery, balanced value).
+
+## Glossary
+
+| Term | Meaning |
+|---|---|
+| **RFQ** | Request for Quotation — a formal document a buyer sends to suppliers asking them to submit a price and terms for specific goods or services. |
+| **FOB** | Free on Board — a pricing term indicating the price covers goods loaded onto a ship at the port of origin; the buyer bears shipping costs and risk from that point onward. |
+| **SKU** | Stock Keeping Unit — a unique identifier for each distinct product or item in a catalog. |
+| **LLM** | Large Language Model — an AI model (e.g. GPT-4o) trained on large amounts of text, used here to power the negotiation agents. |
